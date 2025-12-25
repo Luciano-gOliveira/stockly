@@ -35,14 +35,10 @@ interface UpsertProductContentProps {
   onSuccess?: () => void;
 }
 
-
 const UpsertProductContent = ({
   onSuccess,
   defaultValues,
 }: UpsertProductContentProps) => {
-
-
-
   const form = useForm<UpsertProductSchema>({
     shouldUnregister: true,
     resolver: zodResolver(upsertProductSchema),
@@ -57,9 +53,9 @@ const UpsertProductContent = ({
   // isEditing equivale ao momento em que os valoresPadrao passados na edição existem (são verdadeiros)
   const isEditing = !!defaultValues;
 
-  const {execute: executeUpsertProduct} = useAction(upsertProduct, {
+  const { execute: executeUpsertProduct } = useAction(upsertProduct, {
     onSuccess: () => {
-      onSuccess?.()
+      onSuccess?.();
       isEditing
         ? toast.success("Produto atualizado com sucesso!")
         : toast.success("Produto criado com sucesso!");
@@ -68,13 +64,11 @@ const UpsertProductContent = ({
       isEditing
         ? toast.success("Erro ao atualizar produto")
         : toast.success("Erro ao criar produto");
-    }
-  })
-
+    },
+  });
 
   const onSubmit = async (data: UpsertProductSchema) => {
-     executeUpsertProduct({ ...data, id: defaultValues?.id })
-
+    executeUpsertProduct({ ...data, id: defaultValues?.id });
   };
 
   return (
@@ -82,7 +76,9 @@ const UpsertProductContent = ({
       <DialogHeader>
         <DialogTitle>{isEditing ? "Editar" : "Criar"} Produto</DialogTitle>
         <DialogDescription>Insira as informações abaixo</DialogDescription>
-        <DialogDescription className="text-yellow-500">Dica: aperte TAB para navegar entre os campos</DialogDescription>
+        <DialogDescription className="text-yellow-500">
+          Dica: aperte TAB para navegar entre os campos
+        </DialogDescription>
       </DialogHeader>
       <Form {...form}>
         {/* acessar estado  */}
@@ -134,8 +130,13 @@ const UpsertProductContent = ({
                 <FormLabel>Estoque</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Digite a quantidade em estoque"
-                    {...field}
+                    type="number"
+                    placeholder="Qtd em estoque"
+                    value={field.value}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      field.onChange(value === "" ? undefined : Number(value));
+                    }}
                   />
                 </FormControl>
                 <FormMessage />

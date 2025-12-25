@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <div className="flex h-full">
-          <Sidebar />
+        <div className="flex h-full max-sm:flex-col">
+            <Sidebar />
           {children}
         </div>
         <Toaster/>

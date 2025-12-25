@@ -5,9 +5,9 @@ const Sidebar = () => {
   return (
     <div className="w-64 bg-white">
       <div className="px-8 py-6">
-        <h1 className="text-2xl font-bold">MyWare</h1>
+        <h1 className="text-2xl font-bold max-sm:text-center">MyWare</h1>
       </div>
-      <div className="flex flex-col gap-2 p-2 pl-4">
+      <div className="flex flex-col gap-2 p-2 pl-4 max-sm:w-full">
         <SidebarButton href="/">
           <LayoutTemplateIcon size={20} />
           Dashboard
